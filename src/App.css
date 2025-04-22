@@ -7,15 +7,14 @@
   pointer-events: none;
 }
 
-.navbar a{
+.navbar a {
   color: #ffffff;
   text-decoration: none;
   padding: 10px;
 }
-.navbar a:hover{
+.navbar a:hover {
   text-decoration: underline;
 }
-
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -46,7 +45,6 @@
     transform: rotate(360deg);
   }
 }
-
 
 /* Skeleton Loader Basic Styles */
 .skeleton-container {
@@ -102,4 +100,23 @@
   word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: normal;
+}
+
+.install-button-wrapper {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .install-button-wrapper {
+    display: flex;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+  }
+
+  .install-button-wrapper .btn {
+    padding: 10px 20px;
+    font-weight: bold;
+  }
 }
