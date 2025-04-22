@@ -10,7 +10,7 @@ export default function User() {
         const response = await fetch(
           "https://jsonplaceholder.typicode.com/users"
         ).catch((error) => {
-          alert("Error fetching data:" + error);
+          // alert("Error fetching data:" + error);
         });
         const data = await response.json();
         setUser(data);
@@ -21,6 +21,7 @@ export default function User() {
         console.error("Error fetching data:", error);
         const collectionData = localStorage.getItem("Users");
         setUser(JSON.parse(collectionData));
+        setLoading(false);
       }
     };
     fetchData();
@@ -43,32 +44,34 @@ export default function User() {
             </tr>
           </thead>
           <tbody>
-            {user.map((user, index) => {
-              return (
+            {!loading &&
+              user.map((user, index) => {
+                return (
+                  <tr key={index}>
+                    <td className="wrap-text">{user.id}</td>
+                    <td className="wrap-text">{user.name}</td>
+                    <td className="wrap-text">{user.username}</td>
+                    <td className="wrap-text">{user.email}</td>
+                  </tr>
+                );
+              })}
+            {loading &&
+              Array.from({ length: 5 }).map((_, index) => (
                 <tr key={index}>
-                  <td className="wrap-text">{user.id}</td>
-                  <td className="wrap-text">{user.name}</td>
-                  <td className="wrap-text">{user.username}</td>
-                  <td className="wrap-text">{user.email}</td>
+                  <td>
+                    <Skeleton status={loading} width={60} height={30} />
+                  </td>
+                  <td>
+                    <Skeleton status={loading} width={60} height={30} />
+                  </td>
+                  <td>
+                    <Skeleton status={loading} width={60} height={30} />
+                  </td>
+                  <td>
+                    <Skeleton status={loading} width={60} height={30} />
+                  </td>
                 </tr>
-              );
-            })}
-            {loading && (
-              <tr>
-                <td>
-                  <Skeleton status={loading} />
-                </td>
-                <td>
-                  <Skeleton status={loading} />
-                </td>
-                <td>
-                  <Skeleton status={loading} />
-                </td>
-                <td>
-                  <Skeleton status={loading} />
-                </td>
-              </tr>
-            )}
+              ))}
           </tbody>
         </table>
       </div>
